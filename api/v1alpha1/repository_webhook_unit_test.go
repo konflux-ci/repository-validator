@@ -56,7 +56,7 @@ func TestLoadUrlPrefixAllowListFromFile(t *testing.T) {
 			fileReader: func(name string) ([]byte, error) {
 				return nil, nil
 			},
-			want:    []string{},
+			want:    []string{""},
 			wantErr: false,
 		},
 		{

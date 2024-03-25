@@ -20,6 +20,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	pacv1alpha1 "github.com/openshift-pipelines/pipelines-as-code/pkg/apis/pipelinesascode/v1alpha1"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,17 +28,27 @@ var _ = Describe("Repository Webhook", func() {
 
 	var defaultNS string = "default"
 	var defaultRepoName string = "default-repo"
+	var repository *pacv1alpha1.Repository
 
 	Context("Creating Repository under Validating Webhook", func() {
-		repository := &pacv1alpha1.Repository{
-			ObjectMeta: metav1.ObjectMeta{
-				Name:      defaultRepoName,
-				Namespace: defaultNS,
-			},
-			Spec: pacv1alpha1.RepositorySpec{
-				URL: "https://github.com/org/repo",
-			},
-		}
+		BeforeEach(func() {
+			repository = &pacv1alpha1.Repository{
+				ObjectMeta: metav1.ObjectMeta{
+					Name:      defaultRepoName,
+					Namespace: defaultNS,
+				},
+				Spec: pacv1alpha1.RepositorySpec{
+					URL: "https://github.com/org/repo",
+				},
+			}
+		})
+
+		AfterEach(func() {
+			err := k8sClient.Delete(ctx, repository)
+			if !apierrors.IsNotFound(err) {
+				Expect(err).ToNot(HaveOccurred())
+			}
+		})
 
 		It("Should successfully create a repository", func() {
 			By("Having a prefix in the url allow list the matches the repository url", func() {
@@ -50,8 +61,18 @@ var _ = Describe("Repository Webhook", func() {
 			Expect(err).ToNot(HaveOccurred())
 		})
 
+		It("Should successfully create a repository", func() {
+			By("Having the empty string in the url allow list", func() {
+				urlValidator.URLPrefixAllowList = []string{""}
+			})
+			err := k8sClient.Create(ctx, repository)
+			Expect(err).ToNot(HaveOccurred())
+		})
+
 		It("Should successfully delete a repository", func() {
-			err := k8sClient.Delete(ctx, repository)
+			err := k8sClient.Create(ctx, repository)
+			Expect(err).ToNot(HaveOccurred())
+			err = k8sClient.Delete(ctx, repository)
 			Expect(err).ToNot(HaveOccurred())
 		})
 

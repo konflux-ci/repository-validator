@@ -50,7 +50,7 @@ func (u *URLValidationFailedError) Error() string {
 
 func (u *URLValidator) Validate(url string) (admission.Warnings, error) {
 	for _, urlPrefix := range u.URLPrefixAllowList {
-		if strings.HasPrefix(url, urlPrefix) {
+		if urlPrefix == "" || strings.HasPrefix(url, urlPrefix) {
 			return nil, nil
 		}
 	}
@@ -111,8 +111,8 @@ type FileReader func(name string) ([]byte, error)
 // Load the URL prefix' of allowed URLs from a file
 func LoadUrlPrefixAllowListFromFile(path string, fileReader FileReader) ([]string, error) {
 	if path == "" {
-		log.Info("URL prefix allow list config was not provided")
-		return []string{}, nil
+		log.Info("URL prefix allow list config was not provided, allow all urls")
+		return []string{""}, nil
 	}
 
 	content, err := fileReader(path)
