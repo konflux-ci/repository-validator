@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: repository-validator
+namePrefix: repository-validator-
+resources:
+- ../rbac
+- ../manager
+- ../webhook
+
+components:
+  - ../components/auth-proxy
+  - ../components/enable-webhook
+
+patches:
+  - path: serving-cert-patch.yaml
+    target:
+      name: webhook-service
+      kind: Service
+  - path: inject-ca-patch.yaml
+    target:
+      name: validating-webhook-configuration
+      kind: ValidatingWebhookConfiguration
+
+images:
+  - name: controller
+    newName: quay.io/redhat-user-workloads/konflux-infra-tenant/repository-validator/repository-validator
+    newTag: 1ee871c402fb8ee80040fca20d2b4fd14ed97c0d

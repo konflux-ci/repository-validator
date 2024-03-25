@@ -1,0 +1,4 @@
+---
+- op: add
+  path: /metadata/annotations/service.beta.openshift.io~1inject-cabundle
+  value: "true"
