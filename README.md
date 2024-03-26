@@ -1,8 +1,9 @@
 # repository-validator
-// TODO(user): Add simple overview of use/purpose
+Validating admission webhook for Pipeline As Code [Repositories](https://pipelinesascode.com/docs/guide/repositorycrd/)
 
 ## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
+The validating webhook will ensure that only repositories with URLs that match a prefix from
+a configuration file can be created.
 
 ## Getting Started
 
