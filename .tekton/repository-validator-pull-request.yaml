@@ -391,7 +391,8 @@ spec:
     - name: workspace
     - name: git-auth
       optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-repository-validator
   workspaces:
   - name: workspace
     volumeClaimTemplate:
