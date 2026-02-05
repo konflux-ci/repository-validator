@@ -1,6 +1,6 @@
 module github.com/konflux-ci/repository-validator
 
-go 1.20
+go 1.22
 
 require (
 	github.com/go-logr/logr v1.4.1
@@ -51,6 +51,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.26.0 // indirect
+	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa // indirect
 	golang.org/x/net v0.20.0 // indirect
 	golang.org/x/oauth2 v0.16.0 // indirect
@@ -73,7 +74,7 @@ require (
 	knative.dev/pkg v0.0.0-20230320014357-4c84b1b51ee8 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1 // indirect
-	sigs.k8s.io/yaml v1.4.0 // indirect
+	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
 replace k8s.io/client-go v1.5.2 => k8s.io/client-go v0.28.3
