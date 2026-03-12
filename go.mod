@@ -13,7 +13,7 @@ require (
 )
 
 // If you update dependencies below you must also update controllers/suite_test.go
-require github.com/openshift-pipelines/pipelines-as-code v0.18.0
+require github.com/openshift-pipelines/pipelines-as-code v0.43.0
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
