@@ -9,7 +9,7 @@ require (
 	k8s.io/api v0.28.3
 	k8s.io/apimachinery v0.28.3
 	k8s.io/client-go v1.5.2
-	sigs.k8s.io/controller-runtime v0.16.3
+	sigs.k8s.io/controller-runtime v0.23.3
 )
 
 // If you update dependencies below you must also update controllers/suite_test.go
