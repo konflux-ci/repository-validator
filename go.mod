@@ -1,6 +1,6 @@
 module github.com/konflux-ci/repository-validator
 
-go 1.20
+go 1.21
 
 require (
 	github.com/go-logr/logr v1.4.1
@@ -67,7 +67,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/apiextensions-apiserver v0.28.3 // indirect
 	k8s.io/component-base v0.28.3 // indirect
-	k8s.io/klog/v2 v2.110.1 // indirect
+	k8s.io/klog/v2 v2.140.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20231113174909-778a5567bc1e // indirect
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b // indirect
 	knative.dev/pkg v0.0.0-20230320014357-4c84b1b51ee8 // indirect
